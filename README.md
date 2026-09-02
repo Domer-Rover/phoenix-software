@@ -1,19 +1,49 @@
-# phoenix-software (ROS 2)
-Welcome to the software repo for the Phoenix rover. This repo is no longer supported, and will be housing all future implementations to the radio communication system being used for all future robots! This document will give you a brief description of the repo's layout and an overview of the repo.
+<h1 align="center">
+  phoenix-software
+  <br>
+</h1>
 
-[![Static Badge](https://img.shields.io/badge/Communications_Lead-Henry_Jochaniewicz-D56DE5)](https://github.com/henryJ099123)
+<p align="center">
+  Software for <b>Phoenix</b>, the radio communications system built by <a href="https://github.com/Domer-Rover">Domer Rover</a>.
+  <br />
+  Originally developed for the Phoenix rover, this repo now houses the custom radio comms stack shared across future robots.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-none-lightgrey" alt="License">
+  <img src="https://img.shields.io/badge/Software%20Lead-N%2FA-lightgrey" alt="Software Lead">
+  <img src="https://img.shields.io/badge/CI-Archived-inactive" alt="CI Status">
+</p>
+
+<p align="center">
+  <a href="https://github.com/Domer-Rover">Domer Rover</a>
+  ·
+  <a href="https://github.com/Domer-Rover/phoenix-software/issues">Report an Issue</a>
+</p>
+
+---
+
+> **⚠️ Archived:** This repo is no longer actively supported. It's kept around as the home for the radio communications system, which future Domer Rover robots build on.
+
+## Overview
+
+Phoenix was Domer Rover's rover platform, and this repository was its ROS 2 software stack. Active development has moved on, but the **custom radio communication system** built here continues to be used and extended for future robots.
 
 ## Directory Structure
 
-- **radio_comms**
-  _custom radio communication system_
-- **ws/src**
-  _archived ros-2 packages_
+| Path | Description |
+| --- | --- |
+| `radio_comms` | Custom radio communication system |
+| `ws/src` | Archived ROS 2 packages (2024–2025 Domer Rover, post-SAR) |
 
-Archived:
-2024-2025 Domer Rover Github (Post-SAR)
+## Notes
 
-DO NOT INSTALL: libv4l-dev
+- **Do not install `libv4l-dev`** — installing this apt package on Jetson at any point will break hardware encoding/decoding support.
 
-Please note that installing the 'libv4l-dev' apt package at any point on jetson will break the hardware encoding/decoding support
+## About Domer Rover
 
+[Domer Rover](https://github.com/Domer-Rover) is the University of Notre Dame's rover team, competing at the University Rover Challenge (URC).
+
+## License
+
+No license file is currently included in this repository.
