@@ -79,7 +79,7 @@ git clone https://github.com/DomerRover2024-2025/PhoenixSoftware.git
 To see the most recent radio comms code:
 
 ```sh
-git checkout -b radiocomms
+git checkout -b radiocomms origin/radiocomms
 git pull origin radiocomms
 ```
 
