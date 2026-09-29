@@ -39,6 +39,7 @@ Phoenix was Domer Rover's rover platform, and this repository was its ROS 2 soft
 ## Notes
 
 - **Do not install `libv4l-dev`** — installing this apt package on Jetson at any point will break hardware encoding/decoding support.
+- Transceiver documentation: [https://rfdesign.com.au/wp-content/uploads/x-Series-Datasheet-V2.0.pdf](https://rfdesign.com.au/wp-content/uploads/x-Series-Datasheet-V2.0.pdf).
 
 ## About Domer Rover
 
