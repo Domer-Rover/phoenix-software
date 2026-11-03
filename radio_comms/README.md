@@ -3,6 +3,13 @@
 Repository for the code for the radio and communications system of the rover
 for the Domer Rover team, 2024-2026.
 
+> **New protocol:** [`roverlink/`](roverlink/README.md) supersedes
+> `hieroglyphics/`. It fixes the known issues below (IDs that never wrap,
+> ever-growing ACK sets, endless resends, a busy send loop) and uses a new
+> wire format, so it cannot talk to `hieroglyphics`. New work goes in
+> `roverlink/`; `hieroglyphics/` stays as a reference. The hardware and IP
+> address sections below still apply to both.
+
 ## Maintainers
 
 Please add your name and email below if you help maintain this codebase:
