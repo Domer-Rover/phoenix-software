@@ -11,5 +11,8 @@ requires-python = ">=3.9"
 authors = [{ name = "Gabriel da Silva Marques", email = "gdasilv2@nd.edu" }]
 dependencies = []
 
+[project.scripts]
+roverlink-linktest = "roverlink.tools.linktest:main"
+
 [tool.setuptools.packages.find]
 include = ["roverlink*"]
