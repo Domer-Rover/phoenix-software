@@ -87,6 +87,7 @@ python3 -m venv ../phoenix-venv && source ../phoenix-venv/bin/activate
 # roverlink
 python3 -m pip install -e radio_comms/roverlink
 (cd radio_comms/roverlink && python3 -m unittest discover -v) # all tests, no install needed
+roverlink-linktest listen / connect <host>   # two-machine test over UDP; docs/roverlink-link-test.md
 
 # hieroglyphics (legacy)
 python3 -m pip install pyzmq opencv-python numpy pyserial pygame

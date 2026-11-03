@@ -95,6 +95,20 @@ From this directory (no install needed):
 python3 -m unittest discover -v
 ```
 
+## Testing between two machines
+
+`roverlink-linktest` runs one end of the link on each machine over UDP (for
+example over the Bullets) and sends test traffic: text, pings, bursts and
+streams, with optional simulated loss and corruption.
+
+```sh
+python3 -m roverlink.tools.linktest listen                # one machine
+python3 -m roverlink.tools.linktest connect <address>     # the other
+```
+
+Setup, commands and a test checklist:
+[docs/roverlink-link-test.md](../../docs/roverlink-link-test.md).
+
 ## What's next
 
 Planned for this package: route definitions (wire format of each command and
