@@ -39,13 +39,23 @@ Integration notes, to verify on hardware before you rely on them:
 
 | Path | What it is |
 | --- | --- |
-| `radio_comms/hieroglyphics/` | **Core comms system.** Most work happens here |
+| `radio_comms/roverlink/` | **New comms system** (pip package, stdlib only, no ROS). New work goes here. See its README |
+| `radio_comms/hieroglyphics/` | Legacy comms system, superseded by `roverlink` (incompatible wire format). Keep as a reference; don't extend it |
 | `radio_comms/info_over_bullets_files/` | Scrappy one-off scripts for sending data over the Bullets or Wi-Fi (testing only) |
 | `radio_comms/*.py` | Scratch video tests (`simplevid.py`, `plsworkvideo.py`) |
 | `radio_comms/README.md` | **Main design doc**: hardware setup, IP table, protocol, scheduler, known issues and TODOs |
 | `ws/src/` | Archived ROS 2 workspace from 2024–25 (motor, MoveIt arm, ZED wrapper, rtabmap). **Read-only: do not modify unless explicitly asked** |
 
-## Architecture quick reference (`radio_comms/hieroglyphics`)
+## roverlink (`radio_comms/roverlink`)
+
+- `roverlink/protocol/` is a sans-IO core: `Link.feed(bytes, now)` / `Link.poll(now)` return bytes to write
+  and events. It never reads the clock, starts threads or does I/O, so keep it that way; tests pass `now` in.
+- Frame v1: magic `AA 55`, version, session, seq (u16, wraps), purpose, flags, number, length, payload, CRC-16.
+  Reliable messages are ACKed and resent until a retry/ttl limit; stream messages are sent once.
+- Planned here: routes, TCP/serial transports, a channel simulator, a fake base station. The ROS 2
+  translator node lives in capybara-software as a thin package that depends on `roverlink`.
+
+## Architecture quick reference (`radio_comms/hieroglyphics`, legacy)
 
 - **Rover / server:** `roverComms.py`. It runs three threads: read (main thread, pushes to `MessageQueue`),
   process (`roverMessageProcessor.py`) and send (`scheduler.py`).
@@ -73,6 +83,12 @@ behavior.
 ```sh
 # venv OUTSIDE the repo (or add it to .gitignore)
 python3 -m venv ../phoenix-venv && source ../phoenix-venv/bin/activate
+
+# roverlink
+python3 -m pip install -e radio_comms/roverlink
+(cd radio_comms/roverlink && python3 -m unittest discover -v) # all tests, no install needed
+
+# hieroglyphics (legacy)
 python3 -m pip install pyzmq opencv-python numpy pyserial pygame
 
 cd radio_comms/hieroglyphics           # imports are flat (`from message import Message`)
@@ -83,8 +99,10 @@ python3 -m serial.tools.list_ports     # find the transceiver's port
 
 - Serial: 57600 baud. Set `port` near the top of each driver file.
 - Sockets: `localhost:9999` for single-machine testing. Real IPs are in `radio_comms/README.md`.
-- There are **no automated tests and no CI.** To verify a change, run `python3 -m py_compile` on the files
-  you touched and, where possible, a localhost socket loopback (both sides on one machine).
+- `roverlink` has unit tests (stdlib `unittest`); run them before every commit that touches it.
+  `hieroglyphics` has **no automated tests**, and there is **no CI**. To verify a `hieroglyphics` change, run
+  `python3 -m py_compile` on the files you touched and, where possible, a localhost socket loopback (both
+  sides on one machine).
 - Hardware tests (radios, Bullets, Jetson) are run by a human. **Never claim a hardware test passed.** Say
   what still needs testing on hardware.
 
