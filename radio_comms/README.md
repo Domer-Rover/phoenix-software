@@ -5,7 +5,7 @@ for the Domer Rover team, 2024-2026.
 
 ## Maintainers
 
-**Please add your name and email below if you help maintain this codebase.***
+**Please add your name and email below if you help maintain this codebase.**
 
 - Henry Jochaniewicz (hjochani@nd.edu), graduating 2027
     - Please do not hestitate to contact me even after I graduate and really
@@ -99,6 +99,7 @@ To see the most recent radio comms code:
 
 ```sh
 git checkout -b radiocomms
+git checkout -b radiocomms origin/radiocomms # optionally, to set remote branch
 git pull origin radiocomms
 ```
 
@@ -129,26 +130,16 @@ To set up a virtual environment:
 - On Unix (Linux / Mac):
 
 ```sh
-python3 -m venv <environment_name>
+python3 -m venv <environment_name> # create
+source <environment_name>/bin/activate # activate
+python3 -m pip install -r requirements.txt # install
 ```
 
 - On Windows:
 
 ```sh
 python -m venv <environment_name>
-```
-
-To activate the virtual environment:
-- On Unix (Linux / Mac):
-
-```sh
-source <environment_name>/bin/activate
-```
-
-- On Windows:
-
-```sh
-.\<environment_name>\Scripts\Activate
+python -m pip install -r requirements.txt
 ```
 
 You will know this is successful if `(<environment_name>)` appears before your 
@@ -191,7 +182,6 @@ import <Import Name>
 
 | Package Name      | Import Name   | Reason                        |
 | ----------------- | ------------- | ----------------------------  |
-| `pyzmq`           | `zmq`         | For sockets (now unused)      |
 | `opencv-python`   | `cv2`         | Video feed and camera capture |
 | `numpy`           | `numpy`       | Array math                    |
 | `pyserial`        | `serial`      | Serial port communications    |
@@ -352,14 +342,14 @@ over wifi or the bullets, you can find files for this in
 On the client (user), run 
 
 ```sh
-python3 hieroglyphics/baseStationComms.py
+python3 src/baseStationComms.py
 ```
 
 if in the radio/comms directory. 
 On the server (rover), run
 
 ```sh
-python3 hieroglyphics/roverComms.py
+python3 src/roverComms.py
 ```
 
 ### Over the 900MHz transceivers
@@ -426,8 +416,7 @@ or just `localhost` if running on a single computer.
 ## Overall Code Structure
 
 There are two main directories.
-- `hieroglyphics`, which was called as such because of how difficult this was
-initally to me, contains the real code for the communications system. It was
+- `src`, contains the real code for the communications system. It was
 originally designed only for the 900MHz system, but I believe it should
 be used for both now for simplicity's sake.
 - `info_over_bullet_files`, which holds a bunch of disparate files
