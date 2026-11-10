@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "roverlink"
+version = "0.1.0"
+description = "Reliable radio link between the Domer Rover base station and the rover"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Gabriel da Silva Marques", email = "gdasilv2@nd.edu" }]
+dependencies = []
+
+[project.scripts]
+roverlink-linktest = "roverlink.tools.linktest:main"
+
+[tool.setuptools.packages.find]
+include = ["roverlink*"]

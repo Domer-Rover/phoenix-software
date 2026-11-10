@@ -12,3 +12,4 @@ ws/log
 __pycache__/
 *.log
 *.swp
+*.egg-info/

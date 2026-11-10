@@ -1,0 +1,4 @@
+# Authors: Gabriel da Silva Marques
+# Date last modified: November 3, 2026
+
+"""Reliable radio link between base station and rover."""
