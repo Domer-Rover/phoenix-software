@@ -36,13 +36,13 @@ Any two computers work.
 
 1. **Wire the Bullets** as in [Bullets](../radio_comms/README.md#bullets):
    one Bullet with the laptop, the other with gerbil.
-2. **Addresses.** Both machines need an address on the Bullets' network. Use
-   the [IP address table](../radio_comms/README.md#ip-addresses) for the
-   laptop. Gerbil is not in the table: give it a free address in the same
-   network (not one in the table), for example on Linux:
+2. **Addresses.** Both machines need their address from the
+   [IP address table](../radio_comms/README.md#ip-addresses): "User" for the
+   laptop and "Gerbil" for gerbil's Jetson. They are set by hand, for example
+   on Linux:
    ```sh
-   ip -br addr                                          # find the Ethernet interface
-   sudo ip addr add 192.168.11.<free>/24 dev <interface>   # lasts until reboot
+   ip -br addr                                                # find the Ethernet interface
+   sudo ip addr add <address from the table>/24 dev <interface>   # lasts until reboot
    ```
 3. **Check the network** before anything else, from each machine:
    ```sh
