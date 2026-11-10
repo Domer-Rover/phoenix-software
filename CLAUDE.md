@@ -62,7 +62,7 @@ Integration notes, to verify on hardware before you rely on them:
 - **Base station / client:** `baseStationComms.py`. It runs the same three threads plus the UI
   (`userInterface.py`, text commands such as `test`, `dr`, `stop`, `ldp`, `quit`).
 - **Transport:** the `ReaderWriter` interface (`readerWriter.py`) has two implementations,
-  `SerialReaderWriter` and `SocketReaderWriter` (zmq). You switch between them by hand: edit the `readerWriter`
+  `SerialReaderWriter` and `SocketReaderWriter` (UDP). You switch between them by hand: edit the `readerWriter`
   line in each side's `main`. Automatic link switching does not exist yet.
 - **Message frame** (`message.py`, big-endian):
   `ID u16 | purpose u8 | number u8 | payload size u32 | payload | checksum u8 (bytewise XOR)`.
@@ -89,7 +89,7 @@ python3 -m pip install -e radio_comms/roverlink
 (cd radio_comms/roverlink && python3 -m unittest discover -v) # all tests, no install needed
 
 # hieroglyphics (legacy)
-python3 -m pip install pyzmq opencv-python numpy pyserial pygame
+python3 -m pip install opencv-python numpy pyserial pygame   # pyzmq is no longer used
 
 cd radio_comms/hieroglyphics           # imports are flat (`from message import Message`)
 python3 roverComms.py                  # rover side: start FIRST
@@ -98,7 +98,7 @@ python3 -m serial.tools.list_ports     # find the transceiver's port
 ```
 
 - Serial: 57600 baud. Set `port` near the top of each driver file.
-- Sockets: `localhost:9999` for single-machine testing. Real IPs are in `radio_comms/README.md`.
+- Sockets: UDP port 9998, host `localhost` by default (second command-line argument). Real IPs are in `radio_comms/README.md`.
 - `roverlink` has unit tests (stdlib `unittest`); run them before every commit that touches it.
   `hieroglyphics` has **no automated tests**, and there is **no CI**. To verify a `hieroglyphics` change, run
   `python3 -m py_compile` on the files you touched and, where possible, a localhost socket loopback (both
