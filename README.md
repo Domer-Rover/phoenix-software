@@ -11,7 +11,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-none-lightgrey" alt="License">
-  <img src="https://img.shields.io/badge/Software%20Lead-N%2FA-lightgrey" alt="Software Lead">
+  <img src="https://img.shields.io/badge/Software%20Lead-Henry%20Jochaniewicz-C1E1C1" alt="Software Lead">
   <img src="https://img.shields.io/badge/CI-Archived-inactive" alt="CI Status">
 </p>
 
